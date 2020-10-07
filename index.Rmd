@@ -37,10 +37,10 @@ Ejecute los siguientes pasos para bifurcar a su cuenta en GitHub el repositorio 
   - Suba a su repositorio en GitHub, los archivos _index.Rmd_ e _index.html_, ya sea mediante la interfaz de GitHub o mediante los comandos de [Git](https://git-scm.com/).
 
 ## Desarrollo
-En los siguientes ejercicios se utiliza el data frame ```world```, contenido en el paquete [spData](https://cran.r-project.org/web/packages/spData/).
+En los siguientes ejercicios se utiliza el data frame ```world```, contenido en el paquete [spData](https://cran.r-project.org/web/packages/spData/). Escriba el código en R necesario para realizar cada ejercicio.
 
 ### Carga de paquetes
-```{r}
+```{r message = FALSE, warning = FALSE}
 # Paquete para generación de documentos (ej. HTML)
 library(knitr)
 # Paquete para formateo de tablas
