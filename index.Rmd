@@ -63,7 +63,7 @@ names(world)
 NOTA: recuerde que también puede explorar los datos con funciones como ```str()```, ```summary()``` y ```View()```.
 
 ### Ejercicio 2 (5%)
-Mediante la función ```kable()``` del paquete [knitr](https://cran.r-project.org/web/packages/knitr/), despliegue en una tabla las diez primeras observaciones (i.e. filas, registros) y las cinco primeras variables (i.e. columnas) del data frame  ```world```.
+Mediante la función [kable()](https://www.rdocumentation.org/packages/knitr/versions/1.30/topics/kable) del paquete [knitr](https://cran.r-project.org/web/packages/knitr/), despliegue en una tabla las diez primeras observaciones (i.e. filas, registros) y las cinco primeras variables (i.e. columnas) del data frame  ```world```.
 ```{r}
 kable(
   world[1:10, 1:5, drop = TRUE], 
@@ -83,7 +83,7 @@ kable(
 ```
 
 ### Ejercicio 4 (5%)
-A partir de ```world```, genere un nuevo data frame ordenado por nombre de país. Despliegue los datos en una tabla y utilice las funciones ```kable_styling()``` y ```scroll_box()``` del paquete [kableExtra](https://cran.r-project.org/web/packages/kableExtra/), para desplegar todas las observaciones, con las mismas variables del ejercicio anterior, y agregar una barra de desplazamiento.
+A partir de ```world```, genere un nuevo data frame ordenado por nombre de país. Despliegue los datos en una tabla y utilice las funciones [kable_styling()](https://www.rdocumentation.org/packages/kableExtra/versions/1.2.1/topics/kable_styling) y [scroll_box()](https://www.rdocumentation.org/packages/kableExtra/versions/1.2.1/topics/scroll_box) del paquete [kableExtra](https://cran.r-project.org/web/packages/kableExtra/), para desplegar todas las observaciones, con las mismas variables del ejercicio anterior, y agregar una barra de desplazamiento.
 ```{r}
 # Se extraen las observaciones ordenadas por orden alfabético de país
 world.orden <- order(world$name_long)
@@ -102,7 +102,7 @@ scroll_box(
   fixed_thead = TRUE
 )
 ```
-Note el uso del [operador ```%>%```](https://www.datacamp.com/community/tutorials/pipe-r-tutorial), llamado _pipe_ (tubo), para transmitir datos entre funciones.
+Note el uso del [operador ```%>%```](https://www.datacamp.com/community/tutorials/pipe-r-tutorial), llamado _pipe_ (tubo, cañería), para pasar datos entre funciones.
 
 ### Ejercicio 5 (5%)
 Filtre el data frame ```world``` para extraer en otro data frame las observaciones correspondientes a los siete países de Centroamérica. Mantenga las mismas columnas de los ejercicios anteriores y despliegue los datos en una tabla.
@@ -125,17 +125,22 @@ kable(
 kable_styling()
 ```
 
-### Ejercicio 6 (25%)
-Con la función ```ggplot()``` del paquete [ggplot2](https://ggplot2.tidyverse.org/), genere un gráfico de barras que muestre la esperanza de vida de los siete países de Centroamérica. El gráfico debe tener un título, los nombres (o códigos) de los países bajo cada barra, los valores sobre las barras y etiquetas para los ejes x e y.
+### Ejercicio 6 (15%)
+Con la función ```ggplot()``` del paquete [ggplot2](https://ggplot2.tidyverse.org/), genere un gráfico de barras que muestre la esperanza de vida de los países del continente asiático en los que esa esperanza de vida sea de al menos 80 años. El gráfico debe tener un título, los nombres (o códigos) de los países bajo cada barra, los valores sobre las barras y etiquetas para los ejes x e y.
 ```{r}
 ```
 
-### Ejercicio 7 (25%)
-Con la función ```plot()``` del paquete [sf](https://cran.r-project.org/web/packages/sf/index.html), genere un [mapa de coropletas](https://en.wikipedia.org/wiki/Choropleth_map) con colores que reflejen la esperanza de vida de los siete países de Centroamérica. El mapa debe llevar un título.
+### Ejercicio 7 (20%)
+Con la función ```plot()``` del paquete [sf](https://cran.r-project.org/web/packages/sf/index.html), genere un [mapa de coropletas](https://en.wikipedia.org/wiki/Choropleth_map) con colores que reflejen la esperanza de vida de los países del continente llamado Oceanía. El mapa debe llevar un título.
 ```{r}
 ```
 
-### Ejercicio 8 (25%)
+### Ejercicio 8 (20%)
 Extraiga en un nuevo data frame los países de Centroamérica con esperanza de vida mayor o igual a 74 años y genere el mapa de coropletas, con su título correspondiente.
+```{r}
+```
+
+### Ejercicio 9 (20%)
+Extraiga en un nuevo data frame los países de América del Sur con área de al menos 2.5 millones de km2 o población de al menos 40 millones de personas y genere un mapa de coropletas para cada variable (i.e. área y población), con sus títulos correspondientes.
 ```{r}
 ```

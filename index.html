@@ -1784,7 +1784,7 @@ library(spData)</code></pre>
 </div>
 <div id="ejercicio-2-5" class="section level3">
 <h3>Ejercicio 2 (5%)</h3>
-<p>Mediante la función <code>kable()</code> del paquete <a href="https://cran.r-project.org/web/packages/knitr/">knitr</a>, despliegue en una tabla las diez primeras observaciones (i.e. filas, registros) y las cinco primeras variables (i.e. columnas) del data frame <code>world</code>.</p>
+<p>Mediante la función <a href="https://www.rdocumentation.org/packages/knitr/versions/1.30/topics/kable">kable()</a> del paquete <a href="https://cran.r-project.org/web/packages/knitr/">knitr</a>, despliegue en una tabla las diez primeras observaciones (i.e. filas, registros) y las cinco primeras variables (i.e. columnas) del data frame <code>world</code>.</p>
 <pre class="r"><code>kable(
   world[1:10, 1:5, drop = TRUE], 
   caption=&quot;Datos demográficos de los países del mundo&quot;
@@ -2194,7 +2194,7 @@ South America
 </div>
 <div id="ejercicio-4-5" class="section level3">
 <h3>Ejercicio 4 (5%)</h3>
-<p>A partir de <code>world</code>, genere un nuevo data frame ordenado por nombre de país. Despliegue los datos en una tabla y utilice las funciones <code>kable_styling()</code> y <code>scroll_box()</code> del paquete <a href="https://cran.r-project.org/web/packages/kableExtra/">kableExtra</a>, para desplegar todas las observaciones, con las mismas variables del ejercicio anterior, y agregar una barra de desplazamiento.</p>
+<p>A partir de <code>world</code>, genere un nuevo data frame ordenado por nombre de país. Despliegue los datos en una tabla y utilice las funciones <a href="https://www.rdocumentation.org/packages/kableExtra/versions/1.2.1/topics/kable_styling">kable_styling()</a> y <a href="https://www.rdocumentation.org/packages/kableExtra/versions/1.2.1/topics/scroll_box">scroll_box()</a> del paquete <a href="https://cran.r-project.org/web/packages/kableExtra/">kableExtra</a>, para desplegar todas las observaciones, con las mismas variables del ejercicio anterior, y agregar una barra de desplazamiento.</p>
 <pre class="r"><code># Se extraen las observaciones ordenadas por orden alfabético de país
 world.orden &lt;- order(world$name_long)
 # Se genera un nuevo data frame ordenado
@@ -5248,7 +5248,7 @@ Africa
 </tbody>
 </table>
 </div>
-<p>Note el uso del <a href="https://www.datacamp.com/community/tutorials/pipe-r-tutorial">operador <code>%&gt;%</code></a>, llamado <em>pipe</em> (tubo), para transmitir datos entre funciones.</p>
+<p>Note el uso del <a href="https://www.datacamp.com/community/tutorials/pipe-r-tutorial">operador <code>%&gt;%</code></a>, llamado <em>pipe</em> (tubo, cañería), para pasar datos entre funciones.</p>
 </div>
 <div id="ejercicio-5-5" class="section level3">
 <h3>Ejercicio 5 (5%)</h3>
@@ -5415,17 +5415,21 @@ North America
 </tbody>
 </table>
 </div>
-<div id="ejercicio-6-25" class="section level3">
-<h3>Ejercicio 6 (25%)</h3>
-<p>Con la función <code>ggplot()</code> del paquete <a href="https://ggplot2.tidyverse.org/">ggplot2</a>, genere un gráfico de barras que muestre la esperanza de vida de los siete países de Centroamérica. El gráfico debe tener un título, los nombres (o códigos) de los países bajo cada barra, los valores sobre las barras y etiquetas para los ejes x e y.</p>
+<div id="ejercicio-6-15" class="section level3">
+<h3>Ejercicio 6 (15%)</h3>
+<p>Con la función <code>ggplot()</code> del paquete <a href="https://ggplot2.tidyverse.org/">ggplot2</a>, genere un gráfico de barras que muestre la esperanza de vida de los países del continente asiático en los que esa esperanza de vida sea de al menos 80 años. El gráfico debe tener un título, los nombres (o códigos) de los países bajo cada barra, los valores sobre las barras y etiquetas para los ejes x e y.</p>
 </div>
-<div id="ejercicio-7-25" class="section level3">
-<h3>Ejercicio 7 (25%)</h3>
-<p>Con la función <code>plot()</code> del paquete <a href="https://cran.r-project.org/web/packages/sf/index.html">sf</a>, genere un <a href="https://en.wikipedia.org/wiki/Choropleth_map">mapa de coropletas</a> con colores que reflejen la esperanza de vida de los siete países de Centroamérica. El mapa debe llevar un título.</p>
+<div id="ejercicio-7-20" class="section level3">
+<h3>Ejercicio 7 (20%)</h3>
+<p>Con la función <code>plot()</code> del paquete <a href="https://cran.r-project.org/web/packages/sf/index.html">sf</a>, genere un <a href="https://en.wikipedia.org/wiki/Choropleth_map">mapa de coropletas</a> con colores que reflejen la esperanza de vida de los países del continente llamado Oceanía. El mapa debe llevar un título.</p>
 </div>
-<div id="ejercicio-8-25" class="section level3">
-<h3>Ejercicio 8 (25%)</h3>
+<div id="ejercicio-8-20" class="section level3">
+<h3>Ejercicio 8 (20%)</h3>
 <p>Extraiga en un nuevo data frame los países de Centroamérica con esperanza de vida mayor o igual a 74 años y genere el mapa de coropletas, con su título correspondiente.</p>
+</div>
+<div id="ejercicio-9-20" class="section level3">
+<h3>Ejercicio 9 (20%)</h3>
+<p>Extraiga en un nuevo data frame los países de América del Sur con área de al menos 2.5 millones de km2 o población de al menos 40 millones de personas y genere un mapa de coropletas para cada variable (i.e. área y población), con sus títulos correspondientes.</p>
 </div>
 </div>
 
