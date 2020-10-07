@@ -1,0 +1,141 @@
+---
+title: "PF-0953 Programación geoespacial en R<br>Proyecto 01: R - Visualización de datos vectoriales"
+author: "Manuel Vargas"
+date: "2020-10-07"
+output:
+  html_document:
+    theme: readable    
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false  
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Descripción general
+En este proyecto, aplicará varios comandos de graficación, mapeo y manejo de datos geoespaciales vectoriales en el lenguaje de programación [R](https://www.r-project.org/). El resultado final será un documento en la sintaxis [R Markdown](https://rmarkdown.rstudio.com/) publicado en [GitHub Pages](https://pages.github.com/).
+
+## Fecha de entrega y entregables
+La fecha límite de entrega es el **miércoles 21 de octubre de 2020 antes de las 5:00 p.m. NO SE ACEPTARÁN ENTREGAS DESPUÉS DE ESA FECHA Y HORA**. Debe enviarle al profesor por correo electrónico la dirección del sitio en GitHub Pages resultante.
+
+El proyecto puede realizarse en grupos de un máximo de tres estudiantes. Por favor copie el mensaje de correo a las direcciones de todos los integrantes del grupo e incluya los nombres de los integrantes en los metadatos del documento, en lugar del nombre del profesor. Debe enviarse solamente un mensaje por grupo.
+
+## Trabajo previo
+Se recomienda leer el material preparado por el profesor para las lecciones y consultar la documentación y tutoriales de los paquetes de R que se utilizarán.
+
+## Bifuración y clonación de este documento
+Ejecute los siguientes pasos para bifurcar a su cuenta en GitHub el repositorio que contiene este documento y posteriormente clonarlo a su computadora, para editarlo con RStudio:
+
+1. Bifurque (_fork_) el repositorio [https://github.com/pf0953-programaciongeoespacialr-2020/proyecto-01-r-datos-vectoriales-visualizacion](https://github.com/pf0953-programaciongeoespacialr-2020/proyecto-01-r-datos-vectoriales-visualizacion) a su cuenta personal en GitHub.
+2. En el apartado _Settings_ del repositorio bifurcado a su cuenta, busque la sección _GitHub Pages_ y habilítela al seleccionar _master branch_ como fuente. Tome nota de la dirección web resultante (ej. https://usuario.github.io/proyecto-01-r-datos-vectoriales-visualizacion/).
+3. En RStudio, clone el repositorio de su cuenta personal con la opción de menú _File - New Project - Version Control - Git_. En _Repository URL_ escriba la dirección de su repositorio (ej. https://usuario.github.io/proyecto-01-r-datos-vectoriales-visualizacion.git). Puede obtener esta dirección con el botón _Clone or download_, en la página principal del mismo repositorio.
+4. En R Studio, abra el documento _index.Rmd_ y desarrolle los ejercicios del laboratorio. Cada vez que desee actualizar su documento en GitHub y GitHub Pages:
+  - Presione el botón _Knit_ en RStudio para generar el archivo correspondiente en la sintaxis HTML.
+  - Suba a su repositorio en GitHub, los archivos _index.Rmd_ e _index.html_, ya sea mediante la interfaz de GitHub o mediante los comandos de [Git](https://git-scm.com/).
+
+## Desarrollo
+En los siguientes ejercicios se utiliza el data frame ```world```, contenido en el paquete [spData](https://cran.r-project.org/web/packages/spData/).
+
+### Carga de paquetes
+```{r}
+# Paquete para generación de documentos (ej. HTML)
+library(knitr)
+# Paquete para formateo de tablas
+library(kableExtra)
+# Paquete de graficación
+library(ggplot2)
+# Paquete de manejo de datos geoespaciales vectoriales
+library(sf)
+# Paquete con conjuntos de datos geoespaciales
+library(spData)
+```
+
+Realice los siguientes ejercicios de graficación y manejo de datos vectoriales en R (el valor porcentual de cada uno se muestra entre paréntesis).
+
+### Ejercicio 1 (5%)
+Mediante la función ```names()```, observe las columnas que componen el data frame ```world```.
+```{r}
+names(world)
+```
+NOTA: recuerde que también puede explorar los datos con funciones como ```str()```, ```summary()``` y ```View()```.
+
+### Ejercicio 2 (5%)
+Mediante la función ```kable()``` del paquete [knitr](https://cran.r-project.org/web/packages/knitr/), despliegue en una tabla las diez primeras observaciones (i.e. filas, registros) y las cinco primeras variables (i.e. columnas) del data frame  ```world```.
+```{r}
+kable(
+  world[1:10, 1:5, drop = TRUE], 
+  caption="Datos demográficos de los países del mundo"
+)
+```
+Note el uso del parámetro ```drop=TRUE```, para evitar el despliegue de la tabla de geometrías.
+
+### Ejercicio 3 (5%)
+Mediante la función ```kable()```, despliegue en una tabla las diez primeras observaciones y las variables correspondientes a nombre del país, continente, población, esperanza de vida y renta per cápita del data frame  ```world```. Despliegue los nombres de las columnas en español y un título para la tabla.
+```{r}
+kable(
+  world[1:10, c("name_long","continent","pop","lifeExp","gdpPercap"), drop = TRUE], 
+  col.names=c("País","Continente","Población","Esperanza de vida","Renta per cápita"),  
+  caption="Datos demográficos de los países del mundo"
+)
+```
+
+### Ejercicio 4 (5%)
+A partir de ```world```, genere un nuevo data frame ordenado por nombre de país. Despliegue los datos en una tabla y utilice las funciones ```kable_styling()``` y ```scroll_box()``` del paquete [kableExtra](https://cran.r-project.org/web/packages/kableExtra/), para desplegar todas las observaciones, con las mismas variables del ejercicio anterior, y agregar una barra de desplazamiento.
+```{r}
+# Se extraen las observaciones ordenadas por orden alfabético de país
+world.orden <- order(world$name_long)
+# Se genera un nuevo data frame ordenado
+world.ordenadoxpais <- world[world.orden,]
+# Se formatea la tabla con el nuevo data frame
+kable(
+  world.ordenadoxpais[, c("name_long","continent","pop","lifeExp","gdpPercap"), drop = TRUE], 
+  col.names=c("País","Continente","Población","Esperanza de vida","Renta per cápita"),  
+  caption="Datos demográficos de los países del mundo"
+) %>%
+kable_styling() %>%
+scroll_box(
+  width = "800px", 
+  height = "500px", 
+  fixed_thead = TRUE
+)
+```
+Note el uso del [operador ```%>%```](https://www.datacamp.com/community/tutorials/pipe-r-tutorial), llamado _pipe_ (tubo), para transmitir datos entre funciones.
+
+### Ejercicio 5 (5%)
+Filtre el data frame ```world``` para extraer en otro data frame las observaciones correspondientes a los siete países de Centroamérica. Mantenga las mismas columnas de los ejercicios anteriores y despliegue los datos en una tabla.
+```{r}
+# Se extraen las observaciones correspondientes a los países de Centroamérica
+centro_america = world[world$name_long == "Belize" |
+                       world$name_long == "Guatemala" |
+                       world$name_long == "Honduras" |
+                       world$name_long == "El Salvador" |
+                       world$name_long == "Nicaragua" |
+                       world$name_long == "Costa Rica" |
+                       world$name_long == "Panama"
+                       , ]
+# Se formatea la tabla con el nuevo data frame
+kable(
+  centro_america[, c("name_long","continent","pop","lifeExp","gdpPercap"), drop = TRUE], 
+  col.names=c("País","Continente","Población","Esperanza de vida","Renta per cápita"),  
+  caption="Datos demográficos de los países de Centroamérica"
+) %>%
+kable_styling()
+```
+
+### Ejercicio 6 (25%)
+Con la función ```ggplot()``` del paquete [ggplot2](https://ggplot2.tidyverse.org/), genere un gráfico de barras que muestre la esperanza de vida de los siete países de Centroamérica. El gráfico debe tener un título, los nombres (o códigos) de los países bajo cada barra, los valores sobre las barras y etiquetas para los ejes x e y.
+```{r}
+```
+
+### Ejercicio 7 (25%)
+Con la función ```plot()``` del paquete [sf](https://cran.r-project.org/web/packages/sf/index.html), genere un [mapa de coropletas](https://en.wikipedia.org/wiki/Choropleth_map) con colores que reflejen la esperanza de vida de los siete países de Centroamérica. El mapa debe llevar un título.
+```{r}
+```
+
+### Ejercicio 8 (25%)
+Extraiga en un nuevo data frame los países de Centroamérica con esperanza de vida mayor o igual a 74 años y genere el mapa de coropletas, con su título correspondiente.
+```{r}
+```
